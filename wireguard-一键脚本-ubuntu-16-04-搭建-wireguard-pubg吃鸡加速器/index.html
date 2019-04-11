@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器">
+<meta property="og:url" content="jasminebd.cn/wireguard-一键脚本-ubuntu-16-04-搭建-wireguard-pubg吃鸡加速器/index.html">
+<meta property="og:site_name" content="不点的孤岛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG.jpg?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_1.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_2.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_3.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_5.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_6.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_7.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_10.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/ScreenShot_20190305155908.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_9.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_1.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_2.png?raw=true">
+<meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/WechatIMG86.jpeg?raw=true">
+<meta property="og:updated_time" content="2019-03-16T02:45:14.889Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器">
+<meta name="twitter:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="jasminebd.cn/wireguard-一键脚本-ubuntu-16-04-搭建-wireguard-pubg吃鸡加速器/">
+
+
+
+
+
+  <title>WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器 | 不点的孤岛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不点的孤岛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">jasminebd.cn</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-register">
+          <a href="https://pan.jasminebd.cn" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            寄存站
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="jasminebd.cn/wireguard-一键脚本-ubuntu-16-04-搭建-wireguard-pubg吃鸡加速器/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不点的孤岛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T10:20:07+08:00">
+                2019-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG.jpg?raw=true" alt=""></p>
+<a id="more"></a>
+<h2 id="WireGuard-快速、现代、安全的内核VPN隧道"><a href="#WireGuard-快速、现代、安全的内核VPN隧道" class="headerlink" title="WireGuard - 快速、现代、安全的内核VPN隧道"></a>WireGuard - 快速、现代、安全的内核VPN隧道</h2><p>由<a href="Jason@zx2c4.com">Jason A. Donenfeld</a>的<a href="https://www.edgesecurity.com/" target="_blank" rel="noopener">Edge Security</a><br>WireGuard是一种新颖的VPN，在Linux内核中运行，并使用最先进的加密技术。它的目标是比IPsec更快，更简单，更精简，更有用，同时避免大规模的头痛。它打算比OpenVPN更高效。WireGuard设计为通用VPN，可在嵌入式接口和超级计算机上运行，​​适用于多种不同情况。它运行在UDP上。<br>有关更多信息，请访问<a href="https://WireGuard.com" target="_blank" rel="noopener">WireGuard</a>。</p>
+<h2 id="Ubuntu-16-04-搭建-WireGuard"><a href="#Ubuntu-16-04-搭建-WireGuard" class="headerlink" title="Ubuntu 16.04 搭建 WireGuard"></a>Ubuntu 16.04 搭建 WireGuard</h2><p>首先得有一个vps 这边临时购买了一个阿里云到轻量应用服务器（ 地区：香港，配置信息：CPU:1核 内存：1G SSD:25GB 限峰值宽带：30Mbps 每月流量：1TB 系统：Ubuntu 16.04 ）</p>
+<h3 id="下载脚本："><a href="#下载脚本：" class="headerlink" title="下载脚本："></a>下载脚本：</h3><p><a href="https://github.com/jasminebd/Wireguard" target="_blank" rel="noopener">Github项目地址</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/jasminebd/Wireguard/master/wireguard_install_ubuntu_BD.sh</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_1.png?raw=true" alt=""></p>
+<h3 id="运行脚本："><a href="#运行脚本：" class="headerlink" title="运行脚本："></a>运行脚本：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh wireguard_install_ubuntu_BD.sh</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_2.png?raw=true" alt=""></p>
+<h3 id="WireGuard-脚本-自行操作即可："><a href="#WireGuard-脚本-自行操作即可：" class="headerlink" title="WireGuard 脚本 自行操作即可："></a>WireGuard 脚本 自行操作即可：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 安装Wireguard</span><br><span class="line">2. 查看客户端二维码</span><br><span class="line">3. 删除Wireguard</span><br><span class="line">4. 增加用户</span><br><span class="line">0. 退出脚本</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_3.png?raw=true" alt=""><br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_5.png?raw=true" alt=""></p>
+<h3 id="配置文件及客户端配置文件："><a href="#配置文件及客户端配置文件：" class="headerlink" title="配置文件及客户端配置文件："></a>配置文件及客户端配置文件：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">配置文件：/etc/wireguard/wg0.conf</span><br><span class="line">客户端配置文件：/etc/wireguard/client.conf</span><br></pre></td></tr></table></figure>
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><h3 id="使用Sftp-找到配置文件下载到电脑上："><a href="#使用Sftp-找到配置文件下载到电脑上：" class="headerlink" title="使用Sftp 找到配置文件下载到电脑上："></a>使用Sftp 找到配置文件下载到电脑上：</h3><p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_6.png?raw=true" alt=""></p>
+<h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Windos版 <a href="https://www.wireguard.com/install/" target="_blank" rel="noopener">WireGuard官方客户端</a> 还未开发出来，所以现在使用第三方的客户端<a href="https://tunsafe.com" target="_blank" rel="noopener">TunSafe</a>，TunSafe目前是不点使用过最好用的WireGuard客户端，大家参考参考：<br>连接之后，科学上网什么的妥妥的：<br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_7.png?raw=true" alt=""></p>
+<p><a href="http://yun.jasmines.ml/TunSafe.zip" target="_blank" rel="noopener">TunSafe.zip下载</a><br><a href="https://tunsafe.com/download" target="_blank" rel="noopener">TunSafe官网下载’科学上网’</a></p>
+<h3 id="安装客户端"><a href="#安装客户端" class="headerlink" title="安装客户端"></a>安装客户端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解压 TunSafe.zip</span><br><span class="line">运行 TunSafe-TAP lnstaller.exe 安装虚拟网卡</span><br><span class="line">官网下载的TunSafe_1.x_lnstaller.exe 中安装会联机下载TunSafe-TAP，无需再次安装</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_10.png?raw=true" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：弹出的‘Windows 安全提示’ 勾选始终信任 然后安装！！！</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/ScreenShot_20190305155908.png?raw=true" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运行 TunSafe.exe</span><br><span class="line">将 客户端配置文件client.conf 直接拖到软件 点 确定 就导入成功了</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_9.png?raw=true" alt=""></p>
+<h3 id="客户端使用介绍"><a href="#客户端使用介绍" class="headerlink" title="客户端使用介绍"></a>客户端使用介绍</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connect 连接</span><br><span class="line">Reconnect 重新连接</span><br><span class="line">Disconnect 断开连接</span><br><span class="line">Edit Config 配置客户端文件</span><br></pre></td></tr></table></figure>
+<h2 id="在PUBG延迟对比"><a href="#在PUBG延迟对比" class="headerlink" title="在PUBG延迟对比"></a>在PUBG延迟对比</h2><p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_1.png?raw=true" alt=""><br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_2.png?raw=true" alt=""></p>
+<p>最后上一张近期吃鸡截图 Cheers!<br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/WechatIMG86.jpeg?raw=true" alt=""></p>
+<blockquote>
+<p>声明<br>版权声明：本文为原创文章，版权归 不点 所有。<br>本站链接：<a href="https://blog.jasmines.ml/" target="_blank" rel="noopener">https://blog.jasmines.ml/</a><br>所有原创文章采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名-非商业性使用 4.0 国际许可协议</a> 进行许可。<br>您可以自由的转载和修改，但请务必注明文章来源并且不可用于商业目的。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/《罗小黑战记》/" rel="next" title="《罗小黑战记》">
+                <i class="fa fa-chevron-left"></i> 《罗小黑战记》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">BD</p>
+              <p class="site-description motion-element" itemprop="description">BD a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jasminebd" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bd@jasminebd.cn" target="_blank" title="E-Mail">
+                      E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/jasmine-2-75/activities" target="_blank" title="知乎">
+                      知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WireGuard-快速、现代、安全的内核VPN隧道"><span class="nav-number">1.</span> <span class="nav-text">WireGuard - 快速、现代、安全的内核VPN隧道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-16-04-搭建-WireGuard"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu 16.04 搭建 WireGuard</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载脚本："><span class="nav-number">2.1.</span> <span class="nav-text">下载脚本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行脚本："><span class="nav-number">2.2.</span> <span class="nav-text">运行脚本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WireGuard-脚本-自行操作即可："><span class="nav-number">2.3.</span> <span class="nav-text">WireGuard 脚本 自行操作即可：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件及客户端配置文件："><span class="nav-number">2.4.</span> <span class="nav-text">配置文件及客户端配置文件：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端配置"><span class="nav-number">3.</span> <span class="nav-text">客户端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Sftp-找到配置文件下载到电脑上："><span class="nav-number">3.1.</span> <span class="nav-text">使用Sftp 找到配置文件下载到电脑上：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载客户端"><span class="nav-number">3.2.</span> <span class="nav-text">下载客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装客户端"><span class="nav-number">3.3.</span> <span class="nav-text">安装客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端使用介绍"><span class="nav-number">3.4.</span> <span class="nav-text">客户端使用介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在PUBG延迟对比"><span class="nav-number">4.</span> <span class="nav-text">在PUBG延迟对比</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BD</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
