@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏">
+<meta property="og:url" content="jasminebd.cn/使用-udpspeeder-udp2raw-tunnel，配合wireguard加速优化网络游戏/index.html">
+<meta property="og:site_name" content="不点的孤岛">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/PUBG.png">
+<meta property="og:image" content="https://github.com/wangyu-/UDPspeeder/raw/branch_libev/images/cn/speedercn.PNG">
+<meta property="og:image" content="https://github.com/wangyu-/UDPspeeder/raw/branch_libev/images/Capture2.PNG">
+<meta property="og:image" content="https://github.com/wangyu-/udp2raw-tunnel/raw/master/images/image0.PNG">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw3.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw4.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw5.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw6.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw7.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw3.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw4.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/C_UDPspeeder%2BUdp2raw.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/C_UDPspeeder%2BUdp2raw2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/UDPspeeder%2BUdp2raw.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/UDPspeeder%2BUdp2raw2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/udp2raw.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/speederv2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/Start.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/stop.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/TunSafe_Z.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/TunSafe_Z2.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/TunSafe_ZZ.png">
+<meta property="og:image" content="https://pan.jasminebd.cn/Picture/TunSafe_ZZ2.png">
+<meta property="og:updated_time" content="2019-05-17T07:42:14.545Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏">
+<meta name="twitter:image" content="https://pan.jasminebd.cn/Picture/PUBG.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="jasminebd.cn/使用-udpspeeder-udp2raw-tunnel，配合wireguard加速优化网络游戏/">
+
+
+
+
+
+  <title>使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏 | 不点的孤岛</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不点的孤岛</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">jasminebd.cn</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="jasminebd.cn/使用-udpspeeder-udp2raw-tunnel，配合wireguard加速优化网络游戏/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="BD">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不点的孤岛">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-16T15:40:39+08:00">
+                2019-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://pan.jasminebd.cn/Picture/PUBG.png" alt=""></p>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="UDPspeeder"><a href="#UDPspeeder" class="headerlink" title="UDPspeeder"></a><a href="https://github.com/wangyu-/UDPspeeder" target="_blank" rel="noopener">UDPspeeder</a></h3><p>通过使用前向纠错来改善高延迟有损链路上的网络质量的隧道。<br><img src="https://github.com/wangyu-/UDPspeeder/raw/branch_libev/images/cn/speedercn.PNG" alt=""><br>单独使用时，UDPspeeder仅改进UDP连接。尽管如此，如果您同时使用UDPspeeder +任何基于UDP的VPN，您可以改善任何流量（包括TCP / UDP / ICMP），目前确认支持OpenVPN / L2TP / ShadowVPN。</p>
+<p>作用是给udp流量加冗余和纠错(RS code)，牺牲一定的流量(通常可小于0.5倍)，让网络达到接近零丢包。 可以单独加速udp，或配合VPN加速全流量(tcp/udp/icmp)。 最佳的适用场景是加速游戏，也可加速在线视频和网页浏览。</p>
+<p>配合vpn加速全流量的原理图(已测试支持VPN的有OpenVPN、L2TP、$*** VPN):<br><img src="https://github.com/wangyu-/UDPspeeder/raw/branch_libev/images/Capture2.PNG" alt=""></p>
+<h3 id="udp2raw-tunnel"><a href="#udp2raw-tunnel" class="headerlink" title="udp2raw-tunnel"></a><a href="https://github.com/wangyu-/udp2raw-tunnel" target="_blank" rel="noopener">udp2raw-tunnel</a></h3><p>udp2raw tunnel，通过raw socket给UDP包加上TCP或ICMP header，进而绕过UDP屏蔽或QoS，或在UDP不稳定的环境下提升稳定性。可以有效防止在使用kcptun或者finalspeed的情况下udp端口被运营商限速。</p>
+<p>支持心跳保活、自动重连，重连后会恢复上次连接，在底层掉线的情况下可以保持上层不掉线。同时有加密、防重放攻击、信道复用的功能。<br><img src="https://github.com/wangyu-/udp2raw-tunnel/raw/master/images/image0.PNG" alt=""></p>
+<p>udp2raw不是加速器，只是一个帮助你绕过UDP限制的工具，作用是把udp流量混淆成tcp流量，可以突破udp流量限制或Udp QOS，极大提升稳定性。可以配合kcptun加速tcp，或配合UDPspeeder加速udp，防止各种限速断流。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ol>
+<li><p>直连（适用于vps去回直连线路） : 本地 → vps → Wireguard → 游戏服务器<br>（TCP UDP 经过的理论延迟：本地到vps 30ms + vps到游戏服务器 50ms）</p>
+</li>
+<li><p>国内中转（适用于国外vps绕道转了地球一圈的线路） ： 本地 → 国内vps → 国外vps → Wireguard → 游戏服务器<br>（TCP UDP 经过的理论延迟：本地到国内vps 30ms + 国内vps到国外vps 30ms + 国外vps到游戏服务器 50ms）</p>
+</li>
+</ol>
+<h2 id="配置直连-UDPspeeder-Udp2raw-tunnel"><a href="#配置直连-UDPspeeder-Udp2raw-tunnel" class="headerlink" title="配置直连 UDPspeeder + Udp2raw-tunnel"></a>配置直连 UDPspeeder + Udp2raw-tunnel</h2><blockquote>
+<p>vps服务器还是使用阿里云的香港轻量应用服务器 Ubuntu 16.04</p>
+</blockquote>
+<ol>
+<li>Wireguard 服务端配置</li>
+</ol>
+<p>结合上篇文章 <a href="https://jasminebd.cn/wireguard-%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC-ubuntu-16-04-%E6%90%AD%E5%BB%BA-wireguard-pubg%E5%90%83%E9%B8%A1%E5%8A%A0%E9%80%9F%E5%99%A8/">WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器</a></p>
+<p>终端输入 wg 查看配置端口为42030：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw.png" alt=""></p>
+<blockquote>
+<p>注意：这样有个坑，发现 MTU值为:1420 时服务端会崩溃   </p>
+</blockquote>
+<p>修改一下 /etc/wireguard/wg0.conf 配置文件，将其更改为1200:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/wireguard/wg0.conf</span><br></pre></td></tr></table></figure>
+<p>重新启动一下 Wireguard ：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wg-quick down wg0 <span class="comment">#停止WireGuard</span></span><br><span class="line"></span><br><span class="line">wg-quick up wg0 <span class="comment">#启动WireGuard</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw2.png" alt=""></p>
+<ol start="2">
+<li>vps服务器配置</li>
+</ol>
+<p>新建一个名为UDPspeeder+Udp2raw的文件夹并进入，使用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir UDPspeeder+Udp2raw &amp;&amp; <span class="built_in">cd</span> UDPspeeder+Udp2raw</span><br></pre></td></tr></table></figure>
+<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw3.png" alt=""></p>
+<p>创建启动脚本 Run_UDPspeeder+Udp2raw :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Run_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p>按 i 键编辑，复制粘贴如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line"></span><br><span class="line"><span class="comment">#将 Wireguard 的 42030 端口 UDPspeeder 到 本地的2666端口</span></span><br><span class="line">./speederv2_amd64 -s -l0.0.0.0:2666 -r 127.0.0.1:42030  -f2:4 -k <span class="string">"passwd"</span> &gt; UDPspeeder.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行UDPspeeder"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#将本地的 2666 端口 Udp2raw 到 本地的2777端口</span></span><br><span class="line">./udp2raw_amd64 -s -l0.0.0.0:2777  -r127.0.0.1:2666   -k <span class="string">"passwd"</span> --raw-mode faketcp &gt; Udp2raw.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行Udp2raw"</span></span><br></pre></td></tr></table></figure>
+<p>按esc 输入 冒号 ： wq 退出并保存：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw4.png" alt=""></p>
+<p>创建停止脚步 Stop_UDPspeeder+Udp2raw :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p>按 i 键编辑，复制粘贴如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line">killall speederv2_amd64</span><br><span class="line">killall udp2raw_amd64</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"停止运行UDPspeeder+Udp2raw"</span></span><br></pre></td></tr></table></figure>
+<p>按esc 输入 冒号 ： wq 退出并保存：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw5.png" alt=""></p>
+<blockquote>
+<p>运行 和 停止 :  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh Run_UDPspeeder+Udp2raw.sh</span><br><span class="line"></span><br><span class="line">sh Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw6.png" alt=""></p>
+<blockquote>
+<p>查看端口是否启用 :</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntup</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw7.png" alt=""></p>
+<h2 id="配置中转-UDPspeeder-Udp2raw-tunnel"><a href="#配置中转-UDPspeeder-Udp2raw-tunnel" class="headerlink" title="配置中转 UDPspeeder + Udp2raw-tunnel"></a>配置中转 UDPspeeder + Udp2raw-tunnel</h2><blockquote>
+<p>直连配置略过此步骤！</p>
+</blockquote>
+<p>基于以上vps的配置作为国外vps，现在配置国内vps（国内vps连接国外vps TCP UDP流量多少都会有点拥堵，所以使用UDPspeeder + Udp2raw-tunnel 加速两者之间的连接）：</p>
+<blockquote>
+<p>中转的国内vps就不用安装 Wireguard</p>
+</blockquote>
+<p>同样新建一个名为UDPspeeder+Udp2raw的文件夹并进入，使用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir UDPspeeder+Udp2raw &amp;&amp; <span class="built_in">cd</span> UDPspeeder+Udp2raw</span><br></pre></td></tr></table></figure>
+<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw.png" alt=""></p>
+<p>创建启动脚本 Run_UDPspeeder+Udp2raw :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Run_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p>按 i 键编辑，复制粘贴如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用Udp2raw连接国外vps的2777端口 到本地2555端口</span></span><br><span class="line">./udp2raw_amd64 -c -l127.0.0.1:2555  -r国外vps的ip:2777 -k <span class="string">"passwd"</span> --raw-mode faketcp &gt; Udp2raw.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行Udp2raw"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用UDPspeeder连接本地2555端口 到本地2444端口</span></span><br><span class="line">./speederv2_amd64 -c -l0.0.0.0:2444  -r127.0.0.1:2555 -f2:4 -k <span class="string">"passwd"</span> &gt; UDPspeeder.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行UDPspeeder"</span></span><br></pre></td></tr></table></figure>
+<p>按esc 输入 冒号 ： wq 退出并保存：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw2.png" alt=""></p>
+<p>创建停止脚步 Stop_UDPspeeder+Udp2raw :</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p>按 i 键编辑，复制粘贴如下内容：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line">killall speederv2_amd64</span><br><span class="line">killall udp2raw_amd64</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"停止运行UDPspeeder+Udp2raw"</span></span><br></pre></td></tr></table></figure>
+<p>按esc 输入 冒号 ： wq 退出并保存：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw3.png" alt=""></p>
+<blockquote>
+<p>运行 和 停止   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh Run_UDPspeeder+Udp2raw.sh</span><br><span class="line"></span><br><span class="line">sh Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+<p>查看那些端口是否启用了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntup</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw4.png" alt=""></p>
+<h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><blockquote>
+<p>国内vps中转略过此步骤！</p>
+</blockquote>
+<ul>
+<li>首先下载并安装<a href="https://www.winpcap.org/install/default.htm" target="_blank" rel="noopener">winpcap</a> ，<br>或者使用<a href="https://nmap.org/npcap/" target="_blank" rel="noopener">npcap</a>，据说性能更好一些 :</li>
+</ul>
+<p><img src="https://pan.jasminebd.cn/Picture/C_UDPspeeder%2BUdp2raw.png" alt=""></p>
+<ul>
+<li>安装时一定要把”开启winpcap的兼容模式”打勾。</li>
+</ul>
+<p><img src="https://pan.jasminebd.cn/Picture/C_UDPspeeder%2BUdp2raw2.png" alt=""></p>
+<p>下载并解压win客户端 <a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-multiplatform/releases" target="_blank" rel="noopener">udp2raw-tunnel</a></p>
+<p>假设你放在桌面的 UDPspeeder+Udp2raw 文件夹里并把客户端命名规整一下：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/UDPspeeder%2BUdp2raw.png" alt=""></p>
+<p>然后在同目录下新建4个bat文件，分别命名为 udp2raw.bat 、speederv2.bat 、Start.bat 、stop.bat ：</p>
+<p><img src="https://pan.jasminebd.cn/Picture/UDPspeeder%2BUdp2raw2.png" alt=""></p>
+<p>udp2raw.bat 如下 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">  title udp2raw.bat</span><br><span class="line">udp2raw.exe -c -l127.0.0.1:2555  -rvpsip地址:2777 -k &quot;passwd&quot; --raw-mode faketcp</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/udp2raw.png" alt=""></p>
+<p>speederv2.bat 如下 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">title speederv2.bat</span><br><span class="line">speederv2.exe -c -l0.0.0.0:2444  -r127.0.0.1:2555 -f2:4 -k &quot;passwd&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/speederv2.png" alt=""></p>
+<p>Start.bat 如下 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">cmd /c udp2raw.bat</span><br><span class="line">cmd /c speederv2.bat</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/Start.png" alt=""></p>
+<p>stop.bat 如下 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">taskkill /FI  &quot;WINDOWTITLE eq speederv2.bat&quot;</span><br><span class="line">taskkill /FI  &quot;WINDOWTITLE eq udp2raw.bat&quot;</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/stop.png" alt=""></p>
+<h2 id="TunSafe配置"><a href="#TunSafe配置" class="headerlink" title="TunSafe配置"></a>TunSafe配置</h2><ul>
+<li>直连</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行 Start.bat</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/TunSafe_Z.png" alt=""></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">配置 client.conf</span><br><span class="line">MTU = 1200</span><br><span class="line">Endpoint = 127.0.0.1:2444</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/TunSafe_Z2.png" alt=""></p>
+<ul>
+<li>国内中转 :</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置 国外vps的client.conf</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/TunSafe_ZZ.png" alt=""></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MTU = 1200</span><br><span class="line">Endpoint = 国内ip:2444</span><br></pre></td></tr></table></figure>
+<p><img src="https://pan.jasminebd.cn/Picture/TunSafe_ZZ2.png" alt=""></p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><p><a href="https://github.com/wangyu-/UDPspeeder" target="_blank" rel="noopener">UDPspeeder项目地址</a></p>
+</li>
+<li><p><a href="https://github.com/wangyu-/udp2raw-tunnel" target="_blank" rel="noopener">udp2raw-tunnel项目地址</a></p>
+</li>
+</ul>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><blockquote>
+<p>版权声明：本文为原创文章，版权归 不点 所有。<br>本站链接：<a href="https://jasminebd.cn">https://jasminebd.cn</a><br>所有原创文章采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名-非商业性使用 4.0 国际许可协议</a> 进行许可。<br>您可以自由的转载和修改，但请务必注明文章来源并且不可用于商业目的。   </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/wireguard-一键脚本-ubuntu-16-04-搭建-wireguard-pubg吃鸡加速器/" rel="next" title="WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器">
+                <i class="fa fa-chevron-left"></i> WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">BD</p>
+              <p class="site-description motion-element" itemprop="description">BD a blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/jasminebd" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:bd@jasminebd.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/jasmine-2-75/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-zhihu"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://pan.jasminebd.cn" target="_blank" title="寄存站">
+                      
+                        <i class="fa fa-fw fa-file-download"></i>寄存站</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UDPspeeder"><span class="nav-text">UDPspeeder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#udp2raw-tunnel"><span class="nav-text">udp2raw-tunnel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思路"><span class="nav-text">思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置直连-UDPspeeder-Udp2raw-tunnel"><span class="nav-text">配置直连 UDPspeeder + Udp2raw-tunnel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置中转-UDPspeeder-Udp2raw-tunnel"><span class="nav-text">配置中转 UDPspeeder + Udp2raw-tunnel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端配置"><span class="nav-text">客户端配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TunSafe配置"><span class="nav-text">TunSafe配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-text">相关链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明"><span class="nav-text">声明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">BD</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_lines.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

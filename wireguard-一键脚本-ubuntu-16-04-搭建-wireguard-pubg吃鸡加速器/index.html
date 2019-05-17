@@ -97,8 +97,7 @@
 <meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_1.png?raw=true">
 <meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG_Screenshots_2.png?raw=true">
 <meta property="og:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/WechatIMG86.jpeg?raw=true">
-<meta property="og:image" content="https://www.vultr.com/media/banner_1.png">
-<meta property="og:updated_time" content="2019-04-11T07:04:34.514Z">
+<meta property="og:updated_time" content="2019-05-17T07:33:02.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WireGuard 一键脚本 Ubuntu 16.04 搭建 WireGuard PUBG吃鸡加速器">
 <meta name="twitter:image" content="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/PUBG.jpg?raw=true">
@@ -333,8 +332,13 @@
 <p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_3.png?raw=true" alt=""><br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_5.png?raw=true" alt=""></p>
 <h3 id="配置文件及客户端配置文件："><a href="#配置文件及客户端配置文件：" class="headerlink" title="配置文件及客户端配置文件："></a>配置文件及客户端配置文件：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">配置文件：/etc/wireguard/wg0.conf</span><br><span class="line">客户端配置文件：/etc/wireguard/client.conf</span><br></pre></td></tr></table></figure>
 <h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><h3 id="使用Sftp-找到配置文件下载到电脑上："><a href="#使用Sftp-找到配置文件下载到电脑上：" class="headerlink" title="使用Sftp 找到配置文件下载到电脑上："></a>使用Sftp 找到配置文件下载到电脑上：</h3><p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_6.png?raw=true" alt=""></p>
-<h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Windos版 <a href="https://www.wireguard.com/install/" target="_blank" rel="noopener">WireGuard官方客户端</a> 还未开发出来，所以现在使用第三方的客户端<a href="https://tunsafe.com" target="_blank" rel="noopener">TunSafe</a>，TunSafe目前是不点使用过最好用的WireGuard客户端，大家参考参考：<br>连接之后，科学上网什么的妥妥的：<br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_7.png?raw=true" alt=""></p>
-<p><a href="https://pan.jasminebd.cn/File/TunSafe.zip" target="_blank" rel="noopener">TunSafe.zip下载</a><br><a href="https://tunsafe.com/download" target="_blank" rel="noopener">TunSafe官网下载’科学上网’</a></p>
+<h3 id="下载客户端"><a href="#下载客户端" class="headerlink" title="下载客户端"></a>下载客户端</h3><p>Windos版 <a href="https://www.wireguard.com/install/" target="_blank" rel="noopener">WireGuard官方客户端</a> 刚发布的版本不点试了一下，可能是坐的姿势不对没能连上，所以这边还是使用第三方的客户端<a href="https://tunsafe.com" target="_blank" rel="noopener">TunSafe</a>，TunSafe目前是不点使用过最好用的WireGuard客户端，大家参考参考：<br>连接之后，科学上网什么的妥妥的：<br><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_7.png?raw=true" alt=""></p>
+<ul>
+<li><p><a href="https://pan.jasminebd.cn/File/TunSafe.zip" target="_blank" rel="noopener">在不点的寄存器获取</a></p>
+</li>
+<li><p><a href="https://tunsafe.com/download" target="_blank" rel="noopener">TunSafe官网链接（需要科学上网）</a></p>
+</li>
+</ul>
 <h3 id="安装客户端"><a href="#安装客户端" class="headerlink" title="安装客户端"></a>安装客户端</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">解压 TunSafe.zip</span><br><span class="line">运行 TunSafe-TAP lnstaller.exe 安装虚拟网卡</span><br><span class="line">官网下载的TunSafe_1.x_lnstaller.exe 中安装会联机下载TunSafe-TAP，无需再次安装</span><br></pre></td></tr></table></figure>
 <p><img src="https://github.com/jasminebd/Warehouse/blob/master/Screenshots/Screenshots_10.png?raw=true" alt=""></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注意：弹出的‘Windows 安全提示’ 勾选始终信任 然后安装！！！</span><br></pre></td></tr></table></figure>
@@ -347,7 +351,6 @@
 <blockquote>
 <p>声明<br>版权声明：本文为原创文章，版权归 不点 所有。<br>本站链接：<a href="https://jasminebd.cn">https://jasminebd.cn</a><br>所有原创文章采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" target="_blank" rel="noopener">知识共享署名-非商业性使用 4.0 国际许可协议</a> 进行许可。<br>您可以自由的转载和修改，但请务必注明文章来源并且不可用于商业目的。</p>
 </blockquote>
-<p><a href="https://www.vultr.com/?ref=7876366-4F" target="_blank" rel="noopener"><img src="https://www.vultr.com/media/banner_1.png" width="728" height="90"></a></p>
 
       
     </div>
@@ -381,6 +384,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/使用-udpspeeder-udp2raw-tunnel，配合wireguard加速优化网络游戏/" rel="prev" title="使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏">
+                使用 UDPspeeder+Udp2raw-tunnel，配合Wireguard加速优化网络游戏 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -457,7 +464,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
