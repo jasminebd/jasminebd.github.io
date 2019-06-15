@@ -362,37 +362,48 @@
 </blockquote>
 <p>修改一下 /etc/wireguard/wg0.conf 配置文件，将其更改为1200:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/wireguard/wg0.conf</span><br></pre></td></tr></table></figure>
+
 <p>重新启动一下 Wireguard ：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wg-quick down wg0 <span class="comment">#停止WireGuard</span></span><br><span class="line"></span><br><span class="line">wg-quick up wg0 <span class="comment">#启动WireGuard</span></span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw2.png" alt=""></p>
 <ol start="2">
 <li>vps服务器配置</li>
 </ol>
 <p>新建一个名为UDPspeeder+Udp2raw的文件夹并进入，使用命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir UDPspeeder+Udp2raw &amp;&amp; <span class="built_in">cd</span> UDPspeeder+Udp2raw</span><br></pre></td></tr></table></figure>
-<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure></p>
+
+<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw3.png" alt=""></p>
 <p>创建启动脚本 Run_UDPspeeder+Udp2raw :</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Run_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p>按 i 键编辑，复制粘贴如下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line"></span><br><span class="line"><span class="comment">#将 Wireguard 的 42030 端口 UDPspeeder 到 本地的2666端口</span></span><br><span class="line">./speederv2_amd64 -s -l0.0.0.0:2666 -r 127.0.0.1:42030  -f2:4 -k <span class="string">"passwd"</span> &gt; UDPspeeder.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行UDPspeeder"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#将本地的 2666 端口 Udp2raw 到 本地的2777端口</span></span><br><span class="line">./udp2raw_amd64 -s -l0.0.0.0:2777  -r127.0.0.1:2666   -k <span class="string">"passwd"</span> --raw-mode faketcp &gt; Udp2raw.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行Udp2raw"</span></span><br></pre></td></tr></table></figure>
+
 <p>按esc 输入 冒号 ： wq 退出并保存：</p>
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw4.png" alt=""></p>
 <p>创建停止脚步 Stop_UDPspeeder+Udp2raw :</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p>按 i 键编辑，复制粘贴如下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line">killall speederv2_amd64</span><br><span class="line">killall udp2raw_amd64</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"停止运行UDPspeeder+Udp2raw"</span></span><br></pre></td></tr></table></figure>
+
 <p>按esc 输入 冒号 ： wq 退出并保存：</p>
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw5.png" alt=""></p>
 <blockquote>
 <p>运行 和 停止 :  </p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh Run_UDPspeeder+Udp2raw.sh</span><br><span class="line"></span><br><span class="line">sh Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw6.png" alt=""></p>
 <blockquote>
 <p>查看端口是否启用 :</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntup</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_UDPspeeder%2BUdp2raw7.png" alt=""></p>
 <h2 id="配置中转-UDPspeeder-Udp2raw-tunnel"><a href="#配置中转-UDPspeeder-Udp2raw-tunnel" class="headerlink" title="配置中转 UDPspeeder + Udp2raw-tunnel"></a>配置中转 UDPspeeder + Udp2raw-tunnel</h2><blockquote>
 <p>直连配置略过此步骤！</p>
@@ -403,26 +414,35 @@
 </blockquote>
 <p>同样新建一个名为UDPspeeder+Udp2raw的文件夹并进入，使用命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir UDPspeeder+Udp2raw &amp;&amp; <span class="built_in">cd</span> UDPspeeder+Udp2raw</span><br></pre></td></tr></table></figure>
-<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure></p>
+
+<p>需要在VPS上下载服务端并解压<a href="https://github.com/wangyu-/UDPspeeder/releases" target="_blank" rel="noopener">UDPspeeder</a> + <a href="https://github.com/wangyu-/udp2raw-tunnel/releases" target="_blank" rel="noopener">Udp2raw</a>，地址：点击进入，使用命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UDPspeeder:</span><br><span class="line">wget https://github.com/wangyu-/UDPspeeder/releases/download/20190121.0/speederv2_binaries.tar.gz &amp;&amp; tar -zxf speederv2_binaries.tar.gz</span><br><span class="line"></span><br><span class="line">Udp2raw:</span><br><span class="line">wget https://github.com/wangyu-/udp2raw-tunnel/releases/download/20181113.0/udp2raw_binaries.tar.gz &amp;&amp; tar -zxf udp2raw_binaries.tar.gz</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw.png" alt=""></p>
 <p>创建启动脚本 Run_UDPspeeder+Udp2raw :</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Run_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p>按 i 键编辑，复制粘贴如下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用Udp2raw连接国外vps的2777端口 到本地2555端口</span></span><br><span class="line">./udp2raw_amd64 -c -l127.0.0.1:2555  -r国外vps的ip:2777 -k <span class="string">"passwd"</span> --raw-mode faketcp &gt; Udp2raw.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行Udp2raw"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用UDPspeeder连接本地2555端口 到本地2444端口</span></span><br><span class="line">./speederv2_amd64 -c -l0.0.0.0:2444  -r127.0.0.1:2555 -f2:4 -k <span class="string">"passwd"</span> &gt; UDPspeeder.log 2&gt;&amp;1 &amp;</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"开始运行UDPspeeder"</span></span><br></pre></td></tr></table></figure>
+
 <p>按esc 输入 冒号 ： wq 退出并保存：</p>
 <p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw2.png" alt=""></p>
 <p>创建停止脚步 Stop_UDPspeeder+Udp2raw :</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p>按 i 键编辑，复制粘贴如下内容：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /root/UDPspeeder+Udp2raw/</span><br><span class="line">killall speederv2_amd64</span><br><span class="line">killall udp2raw_amd64</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"停止运行UDPspeeder+Udp2raw"</span></span><br></pre></td></tr></table></figure>
+
 <p>按esc 输入 冒号 ： wq 退出并保存：</p>
 <p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw3.png" alt=""></p>
 <blockquote>
 <p>运行 和 停止   </p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh Run_UDPspeeder+Udp2raw.sh</span><br><span class="line"></span><br><span class="line">sh Stop_UDPspeeder+Udp2raw.sh</span><br></pre></td></tr></table></figure>
+
 <p>查看那些端口是否启用了:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntup</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/S_Z_UDPspeeder%2BUdp2raw4.png" alt=""></p>
 <h2 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h2><blockquote>
 <p>国内vps中转略过此步骤！</p>
@@ -442,29 +462,37 @@
 <p><img src="https://pan.jasminebd.cn/Picture/UDPspeeder%2BUdp2raw2.png" alt=""></p>
 <p>udp2raw.bat 如下 ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">  title udp2raw.bat</span><br><span class="line">udp2raw.exe -c -l127.0.0.1:2555  -rvpsip地址:2777 -k &quot;passwd&quot; --raw-mode faketcp</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/udp2raw.png" alt=""></p>
 <p>speederv2.bat 如下 ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if &quot;%1&quot;==&quot;h&quot; goto begin</span><br><span class="line">start mshta vbscript:createobject(&quot;wscript.shell&quot;).run(&quot;&quot;&quot;%~nx0&quot;&quot; h&quot;,0)(window.close)&amp;&amp;exit</span><br><span class="line">:begin</span><br><span class="line">title speederv2.bat</span><br><span class="line">speederv2.exe -c -l0.0.0.0:2444  -r127.0.0.1:2555 -f2:4 -k &quot;passwd&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/speederv2.png" alt=""></p>
 <p>Start.bat 如下 ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">cmd /c udp2raw.bat</span><br><span class="line">cmd /c speederv2.bat</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/Start.png" alt=""></p>
 <p>stop.bat 如下 ：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">taskkill /FI  &quot;WINDOWTITLE eq speederv2.bat&quot;</span><br><span class="line">taskkill /FI  &quot;WINDOWTITLE eq udp2raw.bat&quot;</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/stop.png" alt=""></p>
 <h2 id="TunSafe配置"><a href="#TunSafe配置" class="headerlink" title="TunSafe配置"></a>TunSafe配置</h2><ul>
 <li>直连</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">运行 Start.bat</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/TunSafe_Z.png" alt=""></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">配置 client.conf</span><br><span class="line">MTU = 1200</span><br><span class="line">Endpoint = 127.0.0.1:2444</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/TunSafe_Z2.png" alt=""></p>
 <ul>
 <li>国内中转 :</li>
 </ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">配置 国外vps的client.conf</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/TunSafe_ZZ.png" alt=""></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MTU = 1200</span><br><span class="line">Endpoint = 国内ip:2444</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://pan.jasminebd.cn/Picture/TunSafe_ZZ2.png" alt=""></p>
 <h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
 <li><p><a href="https://github.com/wangyu-/UDPspeeder" target="_blank" rel="noopener">UDPspeeder项目地址</a></p>
